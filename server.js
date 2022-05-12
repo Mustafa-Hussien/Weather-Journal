@@ -27,7 +27,8 @@ const server = app.listen(port, () => {
 })
 
 // Get request
-app.get('/', (req, res) => {
+app.get('/all', (req, res) => {
+    console.log(res);
     res.send(projectData);
 })
 
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 app.post('/', FindWeather)
 
 function FindWeather(req, res){
+    console.log(res);
     projectData = req.body;
     res.send(projectData);
 }

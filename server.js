@@ -27,17 +27,14 @@ const server = app.listen(port, () => {
 })
 
 // Get request
-const projectData = {};
-
 app.get('/', (req, res) => {
     res.send(projectData);
 })
 
 // Post request
+app.post('/', FindWeather)
 
-app.post('/', (req, res) => {
-    let data = req.body;
-    projectData["temperature"]= data.main.temp;
-    projectData["date"]= data.timezone;
-    projectData["user response"]= document.getElementById('feelings').value;
-})
+function FindWeather(req, res){
+    projectData = req.body;
+    res.send(projectData);
+}

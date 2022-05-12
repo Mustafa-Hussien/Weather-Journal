@@ -1,6 +1,6 @@
 /* Global Variables */
 let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
-let apiKey = '&appid=46ff55eb47c0ac027779dcdff5dd1a67'
+let apiKey = '&appid=46ff55eb47c0ac027779dcdff5dd1a67&units=imperial'
 
 // Create async function 
 const getWeatherData = async (url,zip, key) => {
@@ -8,7 +8,8 @@ const getWeatherData = async (url,zip, key) => {
 
     try {
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
+        return data
       }  catch(error) {
         // appropriately handle the error
         console.log("error", error);
@@ -18,9 +19,33 @@ const getWeatherData = async (url,zip, key) => {
 // Event listener for the generate button
 document.getElementById('generate').addEventListener('click', (e) => {
     let zipCode = document.getElementById('zip').value;
+    let feeling = document.getElementById('feelings').value;
     getWeatherData(baseURL, zipCode,apiKey)
+    .then(function(data){
+      postData('/', {temp: data.main.temp, date: newDate, userResponse: feeling});
+    })
 })
 
-// Create a new date instance dynamically with JS
+const postData = async ( url = '', data = {})=>{
+  console.log(data);
+    const response = await fetch(url, {
+    method: 'POST', 
+    credentials: 'same-origin',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+   // Body data type must match "Content-Type" header        
+    body: JSON.stringify(data), 
+  });
+
+    try {
+      const newData = await response.json();
+      return newData;
+    }catch(error) {
+    console.log("error", error);
+    }
+}
+
+// // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = (d.getMonth()+ 1) +'.'+ d.getDate()+'.'+ d.getFullYear();

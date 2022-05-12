@@ -57,7 +57,7 @@ const updateUI = async () => {
   try {
     const allData = await res.json()
     document.getElementById('date').innerHTML = newDate;
-    document.getElementById('temp').innerHTML = allData.temp;
+    document.getElementById('temp').innerHTML = Math.round(allData.temp)+ '° fahrenheit';
     document.getElementById('content').innerHTML = allData.userResponse;
     }  catch(error) {
       // appropriately handle the error

@@ -26,3 +26,18 @@ const server = app.listen(port, () => {
     console.log(`running on localhost: ${port}`)
 })
 
+// Get request
+const projectData = {};
+
+app.get('/', (req, res) => {
+    res.send(projectData);
+})
+
+// Post request
+
+app.post('/add', (req, res) => {
+    let data = req.body;
+    projectData["temperature"]= data.temperature;
+    projectData["date"]= data.date;
+    projectData["user response"]= data.userResponse;
+})

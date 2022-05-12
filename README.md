@@ -1,5 +1,7 @@
 # Weather-Journal App Project
 
+This app allows you to find the tempartue of your city by entering your zip code and gives back the current date. 
+
 ## Overview
 This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
 

@@ -35,9 +35,9 @@ app.get('/', (req, res) => {
 
 // Post request
 
-app.post('/add', (req, res) => {
+app.post('/', (req, res) => {
     let data = req.body;
-    projectData["temperature"]= data.temperature;
-    projectData["date"]= data.date;
-    projectData["user response"]= data.userResponse;
+    projectData["temperature"]= data.main.temp;
+    projectData["date"]= data.timezone;
+    projectData["user response"]= document.getElementById('feelings').value;
 })
